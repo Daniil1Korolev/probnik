@@ -1,0 +1,16 @@
+﻿<Window x:Class="Fishing2._0.Auth"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Fishing2._0"
+        mc:Ignorable="d"
+        Title="Auth" Height="450" Width="800">
+    <Grid>
+        <Label Content="Авторизация" HorizontalAlignment="Left" Margin="304,30,0,0" VerticalAlignment="Top" Height="60" Width="246" FontSize="36"/>
+        <TextBox x:Name="Login" HorizontalAlignment="Center" Margin="0,141,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="202" Height="45"/>
+        <TextBox x:Name="Password" HorizontalAlignment="Center" Margin="0,232,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="202" Height="45"/>
+        <Button x:Name="Vhod" Content="Войти" HorizontalAlignment="Left" Margin="334,321,0,0" VerticalAlignment="Top" Height="37" Width="106" Click="Vhod_Click"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище ribalkaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Active">
+    <Key>
+      <PropertyRef Name="ID_Active" />
+    </Key>
+    <Property Name="ID_Active" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Number" Type="int" Nullable="false" />
+    <Property Name="DateAdd" Type="date" Nullable="false" />
+    <Property Name="NameActive" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Category" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="Count" Type="int" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="NameFish" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Feeding">
+    <Key>
+      <PropertyRef Name="ID_Feeding" />
+    </Key>
+    <Property Name="ID_Feeding" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FeederName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Active_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Fishing">
+    <Key>
+      <PropertyRef Name="ID_Fishing" />
+    </Key>
+    <Property Name="ID_Fishing" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateFishingStart" Type="datetime" Nullable="false" />
+    <Property Name="InstructorName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TouristName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateFishingEnd" Type="datetime" Nullable="false" />
+    <Property Name="Active_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FishResult">
+    <Key>
+      <PropertyRef Name="ID_FishResult" />
+    </Key>
+    <Property Name="ID_FishResult" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountFish" Type="int" Nullable="false" />
+    <Property Name="Fishing_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID_User" />
+    </Key>
+    <Property Name="ID_User" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Login" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Feeding_Active">
+    <End Role="Active" Type="Self.Active" Multiplicity="1" />
+    <End Role="Feeding" Type="Self.Feeding" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Active">
+        <PropertyRef Name="ID_Active" />
+      </Principal>
+      <Dependent Role="Feeding">
+        <PropertyRef Name="ID_Feeding" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Fishing_Active">
+    <End Role="Active" Type="Self.Active" Multiplicity="1" />
+    <End Role="Fishing" Type="Self.Fishing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Active">
+        <PropertyRef Name="ID_Active" />
+      </Principal>
+      <Dependent Role="Fishing">
+        <PropertyRef Name="Active_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FishResult_Fishing">
+    <End Role="Fishing" Type="Self.Fishing" Multiplicity="1" />
+    <End Role="FishResult" Type="Self.FishResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fishing">
+        <PropertyRef Name="ID_Fishing" />
+      </Principal>
+      <Dependent Role="FishResult">
+        <PropertyRef Name="Fishing_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище ribalkaModelContainer">
+    <EntitySet Name="Active" EntityType="Self.Active" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Feeding" EntityType="Self.Feeding" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Fishing" EntityType="Self.Fishing" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FishResult" EntityType="Self.FishResult" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Feeding_Active" Association="Self.FK_Feeding_Active">
+      <End Role="Active" EntitySet="Active" />
+      <End Role="Feeding" EntitySet="Feeding" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Fishing_Active" Association="Self.FK_Fishing_Active">
+      <End Role="Active" EntitySet="Active" />
+      <End Role="Fishing" EntitySet="Fishing" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FishResult_Fishing" Association="Self.FK_FishResult_Fishing">
+      <End Role="Fishing" EntitySet="Fishing" />
+      <End Role="FishResult" EntitySet="FishResult" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
